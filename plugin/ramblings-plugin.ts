@@ -1,5 +1,6 @@
 import path from "path"
 import { fileURLToPath } from "url"
+import { conductor } from "./agents/conductor"
 import { ramblingsCommands } from "./commands/index"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -16,6 +17,11 @@ export default async function ramblingsPlugin() {
       }
 
       config.command = config.command || {}
+      config.agent = config.agent || {}
+
+      if (!("conductor" in config.agent)) {
+        config.agent.conductor = conductor
+      }
 
       for (const [name, definition] of Object.entries(ramblingsCommands)) {
         if (!(name in config.command)) {

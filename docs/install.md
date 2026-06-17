@@ -30,6 +30,7 @@ The plugin will:
 
 - register `<repo>/skills`
 - inject the bundled commands
+- inject the `conductor` planning agent
 
 ## Notes
 

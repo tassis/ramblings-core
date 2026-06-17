@@ -8,6 +8,7 @@ This repo provides two layers:
 2. `plugin/` — an OpenCode plugin that:
    - registers this repo's `skills/` directory
    - injects optional commands such as `office-hours` and `plan-ceo-review`
+   - injects a custom primary agent named `conductor`
 
 ## Principles
 
@@ -46,6 +47,7 @@ If you are testing from a local clone instead of GitHub, you can still use a dir
 
 ## Commands provided by the plugin
 
+- `conductor`
 - `office-hours`
 - `plan-ceo-review`
 - `plan-eng-review`
@@ -55,6 +57,20 @@ If you are testing from a local clone instead of GitHub, you can still use a dir
 - `investigate`
 - `write-spec`
 - `write-plan`
+- `start-work`
 - `execute-plan`
+
+## Agent provided by the plugin
+
+- `conductor` — planning-only custom agent for project-root `.ramblings/` artifacts
+
+Use Conductor when you want a planning surface that can write:
+
+- `.ramblings/plans/**`
+- `.ramblings/specs/**`
+- `.ramblings/checklists/**`
+- `.ramblings/handoffs/**`
+
+without entering implementation.
 
 See `docs/commands.md` for details.

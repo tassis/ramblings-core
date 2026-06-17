@@ -14,12 +14,15 @@ This skill is for the phase after planning, not for discovering requirements or 
 Usually one of these exists already:
 
 - a plan in `.ramblings/plans/`;
+- a plan in `.ramblings/plans/` plus execution state in `.ramblings/checklists/`;
 - an approved spec plus a clear execution checklist;
 - a user-approved ordered task list.
 
 If there is no real plan yet, stop and use `ramblings-writing-plans` first.
 
 If there is a plan but it does not expose execution state clearly enough to resume safely, add or normalize a checklist/tracker before doing broad multi-step work.
+
+If you are still in Conductor Mode, that normalization may write `.ramblings/plans/**` or `.ramblings/checklists/**` artifacts, but it must not spill into product-code edits.
 
 ## Goal
 
@@ -55,7 +58,7 @@ Do not execute the whole plan at once.
 
 Pick the next smallest meaningful task and focus on that slice only.
 
-Choose it from an explicit tracker, checkbox list, or status field whenever one exists.
+Choose it from an explicit tracker, checkbox list, separate checklist file, or status field whenever one exists.
 
 ### 3. Check reality before coding
 
@@ -88,6 +91,7 @@ If the plan uses checkboxes, update them.
 If you discover a blocker, note it clearly rather than skipping ahead invisibly.
 If the plan only has prose tasks, add a minimal tracker or status markers before continuing deeper execution.
 If the tracker and a task's `Status:` disagree, fix the plan state and use the task `Status:` plus current code reality as the source of truth.
+If the plan points to a separate checklist file, use that checklist as the primary execution-state record and keep the plan references consistent with it.
 
 ## Idempotent execution posture
 

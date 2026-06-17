@@ -24,6 +24,14 @@ Save plans under:
 
 Use the user's preferred location if they explicitly override this.
 
+In Conductor Mode, writing planning artifacts under `.ramblings/` is allowed and expected. Conductor Mode should not treat these files as implementation edits.
+
+If execution state should live separately from the main plan, save it under:
+
+```text
+.ramblings/checklists/YYYY-MM-DD-<topic>.md
+```
+
 ## When to use
 
 Use this skill when:
@@ -69,7 +77,9 @@ Every plan should start with:
 
 Then add task sections.
 
-Immediately after the header, add an execution tracker:
+Immediately after the header, either add an inline execution tracker or link to a separate checklist file under `.ramblings/checklists/`.
+
+Inline form:
 
 ```markdown
 ## Execution Tracker
@@ -82,6 +92,14 @@ Immediately after the header, add an execution tracker:
 This tracker starts unchecked. It exists so implementation sessions can update progress in-place instead of reconstructing state from memory.
 
 The tracker is a compact overview only. If the tracker and a task's `Status:` ever disagree, treat the task's `Status:` field as the source of truth.
+
+Separate-file form:
+
+```markdown
+**Execution State:** `.ramblings/checklists/YYYY-MM-DD-<topic>.md`
+```
+
+If a separate checklist file is used, it becomes the source of truth for execution progress and should mirror task names clearly.
 
 ## Task structure
 
@@ -132,6 +150,7 @@ Use this format:
 7. Every task must have a visible status field and completion criteria.
 8. Every risky or multi-step task must say how to detect "already done" before re-executing it.
 9. A task is not complete until its verification has passed and its status/tracker has been updated.
+10. Conductor Mode may write or update `.ramblings/plans/**` and `.ramblings/checklists/**`, but should not edit product code while doing planning-only work.
 
 ## No-placeholder rule
 

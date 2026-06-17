@@ -2,6 +2,10 @@
 
 These commands are injected by `plugin/ramblings-plugin.ts`.
 
+## conductor
+
+Use to enter Conductor Mode for planning-only work on project-root `.ramblings/` artifacts.
+
 ## office-hours
 
 Use for early discussion, scope discovery, and feature or product shaping.
@@ -38,6 +42,10 @@ Use to turn discussion into a written spec.
 
 Use to turn an approved direction into an implementation plan.
 
+## start-work
+
+Use to start or resume execution from the active unfinished plan under the current project's root `.ramblings/` directory.
+
 ## execute-plan
 
-Use to execute an existing plan in small, verified steps.
+Legacy alias for `start-work`.
