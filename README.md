@@ -8,7 +8,7 @@ This repo provides two layers:
 2. `plugin/` — an OpenCode plugin that:
    - registers this repo's `skills/` directory
    - injects optional commands such as `office-hours`, `start-feature`, and `plan-ceo-review`
-   - injects a custom primary agent named `conductor`
+   - injects custom primary agents named `conductor` and `review`
 
 ## Principles
 
@@ -77,6 +77,7 @@ There is currently no dedicated archive command; archiving is an explicit operat
 ## Agent provided by the plugin
 
 - `conductor` — planning-only custom agent for project-root `.ramblings/` artifacts
+- `review` — shared review execution surface for skill-driven product, engineering, QA, and DevEx review
 
 Use Conductor when you want a planning surface that can write:
 
@@ -88,5 +89,7 @@ Use Conductor when you want a planning surface that can write:
 - `.ramblings/retros/**`
 
 without entering implementation.
+
+Use Review when you want a stable review carrier that routes through the selected review skill for persona, skepticism, and recommendation shape.
 
 See `docs/commands.md` for details.

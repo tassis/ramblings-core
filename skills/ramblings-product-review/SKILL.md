@@ -5,21 +5,47 @@ description: Product review, scope review, requirement challenge, user value rev
 
 # Ramblings Product Review
 
-Use this skill to challenge a proposal from the product perspective.
+Use this skill when a proposal needs a hard product-owner check.
 
-This is especially useful during discussion, brainstorming, spec writing, or before committing to a large implementation plan.
+This reviewer protects user value, problem clarity, and scope discipline. Default stance: skeptical of broad ambition, vague value, and v1s that grow past the real user pain.
 
 ## Core questions
 
 Ask:
 
-1. What user problem is this actually solving?
-2. Is the value clear enough to justify the complexity?
-3. Is the scope too wide for the current goal?
-4. What is the simplest version that still creates meaningful value?
-5. Are we solving the real problem or just an interesting technical one?
+1. What user pain is real enough to justify building this now?
+2. What is the smallest version that still solves that pain?
+3. What scope should be cut without damaging value?
+4. Is this a product decision or a technical curiosity in disguise?
+5. What proof says the problem is worth this effort?
 
 ## Review areas
+
+### Stance / incentives
+
+- Protect the user outcome first; do not reward clever scope.
+- Prefer fewer promises, sharper focus, and a clearer first win.
+- Trade breadth away quickly if it does not strengthen the core value.
+
+### Default suspicion
+
+- vague value claims;
+- oversized first versions;
+- solution-first framing;
+- workflows that ask users to adapt to the system.
+
+### Approval bar
+
+- a concrete target user or use case;
+- a clear problem worth solving;
+- a cut-down version that still matters;
+- a reason to believe the scope is proportionate.
+
+### Escalation behavior
+
+- call the framing too broad or not yet justified;
+- push hard on cuts when value is uncertain;
+- ask for the user pain, not the feature wishlist.
 
 ### Problem clarity
 
@@ -50,24 +76,24 @@ Ask:
 ```markdown
 ## Product Review
 
-**What seems strong:**
+**What I believe is true:**
 - [item]
 
-**Main product concerns:**
+**What I do not buy yet:**
 - [item]
 
-**Scope reductions to consider:**
+**The most important risk or flaw:**
 - [item]
 
-**Questions that should be answered before building:**
+**What would change my mind:**
 - [item]
 
-**Recommended direction:**
+**My recommendation now:**
 - [short recommendation]
 ```
 
 ## Guidance
 
-- push for clarity, not just ambition;
-- prefer smaller, more testable scope when value is still uncertain;
-- challenge unnecessary complexity, even if the technical idea is attractive.
+- be crisp and reductionist;
+- cut scope aggressively when value is fuzzy;
+- reject ambition that has not earned its size.

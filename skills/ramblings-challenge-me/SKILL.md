@@ -17,9 +17,16 @@ This skill is for moments like:
 
 ## Goal
 
-Apply the right set of review lenses to the current idea, not all possible lenses by default.
+Run a focused review panel around the current artifact, not a generic multi-lens summary.
 
 This is an optional review panel, not a mandatory workflow stage.
+
+The job is to:
+
+- pick only the relevant reviewers;
+- let each reviewer take a clear position;
+- preserve useful disagreement;
+- synthesize only after the reviewer stances are explicit.
 
 ## Available lenses
 
@@ -50,6 +57,14 @@ Use `ramblings-qa-review` when the question is:
 - what verification is missing;
 - what assumptions need to be tested.
 
+### 4. DevEx review
+
+Use `ramblings-devex-review` when the question is:
+
+- how painful this will be to set up, operate, or maintain;
+- where tribal knowledge or workflow magic is hiding;
+- whether a future maintainer will pay too much for today's convenience.
+
 ## How to use this challenge
 
 1. Identify what artifact is being challenged:
@@ -61,16 +76,28 @@ Use `ramblings-qa-review` when the question is:
 
 2. Pick only the relevant lenses.
 
-3. Ask each lens to produce:
-   - concerns
-   - trade-offs
-   - questions
-   - recommended changes
+3. Ask each reviewer to produce a position, not just a list:
+   - what they believe is true;
+   - what they do not buy yet;
+   - the most important risk or flaw;
+   - what would change their mind;
+   - their recommendation now.
 
-4. Synthesize the output into:
-   - keep as-is
-   - revise now
-   - defer open questions
+4. Surface the real disagreements before trying to resolve them.
+
+5. Synthesize the panel into one bounded outcome:
+   - proceed;
+   - proceed with cuts;
+   - revise now;
+   - block pending answers;
+   - split scope / change approach.
+
+## Panel behavior
+
+- do not flatten different reviewers into one blended voice too early;
+- do not manufacture disagreement for drama, but do not hide it when it matters;
+- preserve reviewer attribution clearly;
+- if multi-session review is used later, keep exchanges short and bounded rather than open-ended debate.
 
 ## Output format
 
@@ -81,22 +108,32 @@ Use `ramblings-qa-review` when the question is:
 - [idea / spec / plan / change]
 
 **Lenses used:**
-- product / engineering / QA
+- product / engineering / QA / DevEx
 
-**Main challenges raised:**
+**Reviewer positions:**
+- **Product:** [position]
+- **Engineering:** [position]
+- **QA:** [position]
+- **DevEx:** [position]  # include only when used
+
+**Main disagreements or tensions:**
 - [item]
+
+**Synthesis outcome:**
+- [proceed / proceed with cuts / revise now / block pending answers / split scope / change approach]
 
 **Changes recommended now:**
 - [item]
 
-**Questions to defer:**
+**Open questions to resolve:**
 - [item]
 ```
 
 ## Guidance
 
-- do not manufacture disagreement for its own sake;
 - do not use every lens if one or two are enough;
+- preserve clear reviewer identity before synthesis;
 - be direct and useful, not theatrical;
+- when one reviewer would block while another would proceed, name the conflict explicitly instead of smoothing it over;
 - if the review substantially changes the direction, update `.ramblings/specs/` or `.ramblings/plans/`.
 - if the user wants one-question-at-a-time pressure questioning instead of a synthesized critique, use `ramblings-grill-me` instead.

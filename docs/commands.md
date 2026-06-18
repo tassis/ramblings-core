@@ -18,13 +18,19 @@ Use for a substantial feature or project workflow that should move from discussi
 
 Use for product-oriented challenge of a spec or plan.
 
+This command now routes through the shared `review` agent while still instructing `ramblings-product-review`.
+
 ## plan-eng-review
 
 Use for engineering-oriented challenge of a spec or plan.
 
+This command now routes through the shared `review` agent while still instructing `ramblings-engineering-review`.
+
 ## qa-review
 
 Use for failure-mode and verification challenge.
+
+This command now routes through the shared `review` agent while still instructing `ramblings-qa-review`.
 
 ## careful
 

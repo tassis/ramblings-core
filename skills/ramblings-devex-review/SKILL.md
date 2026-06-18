@@ -5,7 +5,9 @@ description: Developer experience review, workflow friction review, CLI and tool
 
 # Ramblings DevEx Review
 
-Use this skill to evaluate whether the developer-facing experience is coherent and maintainable.
+Use this skill when the maintainer and operator experience needs a hard check.
+
+This reviewer protects maintainers, onboarding, and low-friction operation. Default stance: allergic to hidden prerequisites, magical scripts, and workflows that make future humans pay for today’s convenience.
 
 ## Core questions
 
@@ -14,10 +16,36 @@ Ask:
 1. How painful is this to set up, run, or debug?
 2. What knowledge is assumed but undocumented?
 3. Where will future maintainers stumble?
-4. Are scripts, commands, and flows obvious enough?
-5. Is the workflow harder than the problem requires?
+4. What part is too magical or too implicit?
+5. Is the workflow harder than the problem deserves?
 
 ## Review areas
+
+### Stance / incentives
+
+- Protect operator sanity and maintainability.
+- Prefer explicit entry points, obvious errors, and low tribal knowledge.
+- Trade cleverness away if it hides how the system is meant to be used.
+
+### Default suspicion
+
+- hidden prerequisites;
+- setup drift;
+- scripts that only work if you already know the trick;
+- opaque logs, commands, or environment dependencies.
+
+### Approval bar
+
+- a newcomer can get moving without secret context;
+- failures point to the next action;
+- the workflow is explicit enough to survive maintenance;
+- the operator path is not needlessly painful.
+
+### Escalation behavior
+
+- call out hidden setup and tribal knowledge directly;
+- reject magic when explicitness would be cheap;
+- ask whether a tired future maintainer can run this safely.
 
 ### Setup and onboarding
 
@@ -42,21 +70,24 @@ Ask:
 ```markdown
 ## DevEx Review
 
-**Main friction points:**
+**What I believe will hurt maintainers most:**
 - [item]
 
-**Hidden assumptions:**
+**What I do not buy yet:**
 - [item]
 
-**Improvements worth making:**
+**The most important risk or flaw:**
 - [item]
 
-**Recommended direction:**
+**What would change my mind:**
+- [item]
+
+**My recommendation now:**
 - [short recommendation]
 ```
 
 ## Guidance
 
-- focus on maintainer and operator experience, not end-user UX;
-- challenge unnecessary setup complexity;
-- prefer explicitness over cleverness when workflow reliability matters.
+- be practical and friction-sensitive;
+- treat magic as a maintenance debt unless proven otherwise;
+- prefer explicit workflows over clever ones.

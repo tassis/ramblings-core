@@ -139,19 +139,23 @@ If neither handoff supersedes the other and the current plan/checklist/spec stat
 
 | Skill | Purpose | Use when | Not for |
 |---|---|---|---|
-| [`ramblings-product-review`](../skills/ramblings-product-review/SKILL.md) | Challenge value, scope, prioritization, and product coherence. | The main question is whether the proposed work solves the right problem in the right scope. | Architecture-heavy critique or failure-mode-focused review. |
-| [`ramblings-engineering-review`](../skills/ramblings-engineering-review/SKILL.md) | Challenge structure, coupling, complexity, and maintainability. | The main question is whether the technical shape is sound. | Product-scope critique or review-feedback handling. |
-| [`ramblings-qa-review`](../skills/ramblings-qa-review/SKILL.md) | Challenge edge cases, failure modes, and verification gaps. | The main question is what can break and what is still unverified. | Product-value critique or implementation execution. |
-| [`ramblings-devex-review`](../skills/ramblings-devex-review/SKILL.md) | Challenge developer/operator workflow quality. | The main question is setup pain, maintainability, CLI clarity, or debugging friction. | End-user UX review or generic architecture review. |
+| [`ramblings-product-review`](../skills/ramblings-product-review/SKILL.md) | Product reviewer contract with strong scope and value pressure. | The main question is whether the proposed work solves the right problem in the right scope. | Architecture-heavy critique or failure-mode-focused review. |
+| [`ramblings-engineering-review`](../skills/ramblings-engineering-review/SKILL.md) | Engineering reviewer contract focused on structure, coupling, and overengineering risk. | The main question is whether the technical shape is sound. | Product-scope critique or review-feedback handling. |
+| [`ramblings-qa-review`](../skills/ramblings-qa-review/SKILL.md) | QA reviewer contract focused on likely breakage, verification gaps, and proof quality. | The main question is what can break and what is still unverified. | Product-value critique or implementation execution. |
+| [`ramblings-devex-review`](../skills/ramblings-devex-review/SKILL.md) | DevEx reviewer contract focused on maintainer/operator pain, setup friction, and workflow clarity. | The main question is setup pain, maintainability, CLI clarity, or debugging friction. | End-user UX review or generic architecture review. |
+
+The repo also exposes a shared `review` agent surface for review workflows. It is a stable carrier only; the selected review skill remains the primary source of reviewer persona, skepticism, and verdict shape.
 
 ## Review Orchestration and Review Workflow
 
 | Skill | Purpose | Use when | Not for |
 |---|---|---|---|
-| [`ramblings-challenge-me`](../skills/ramblings-challenge-me/SKILL.md) | Structured multi-lens critique of an idea, spec, plan, or change. | You want pressure testing from multiple perspectives rather than one lens. | One-question-at-a-time interviews or single-lens critique. |
+| [`ramblings-challenge-me`](../skills/ramblings-challenge-me/SKILL.md) | Review-panel orchestration that preserves reviewer positions before synthesis. | You want pressure testing from multiple perspectives rather than one lens. | One-question-at-a-time interviews or single-lens critique. |
 | [`ramblings-grill-me`](../skills/ramblings-grill-me/SKILL.md) | One-question-at-a-time interrogation to force clarity. | You want to be questioned until assumptions and requirements are explicit. | A full multi-lens review dump or passive summary. |
 | [`ramblings-requesting-code-review`](../skills/ramblings-requesting-code-review/SKILL.md) | Prepare a focused review request after implementation exists. | The next step is reviewer attention and you want the review context organized. | Handling existing reviewer comments. |
 | [`ramblings-receiving-code-review`](../skills/ramblings-receiving-code-review/SKILL.md) | Evaluate and respond to incoming review feedback. | Reviewer comments already exist and need technical handling. | Requesting a new review or brainstorming design options from scratch. |
+
+Multi-session review is allowed as an optional pattern: one shared review-agent surface may be instantiated multiple times with different review skills/personas when tension between reviewers is useful. This does **not** imply separate reviewer-specific agents by default. Keep exchanges bounded and leave final synthesis/arbitration to `ramblings-challenge-me` or a broader orchestration layer.
 
 ## Command-First / Protocol / Modifier Guidance
 
@@ -176,7 +180,7 @@ For delegated Ultrawork execution, prefer a YAML checklist under `.ramblings/che
 | You want to write down the chosen direction as an artifact. | `ramblings-spec-writing` | `ramblings-brainstorming` | The work has converged enough to capture. |
 | You need to understand current behavior before deciding what to change. | `ramblings-investigation` | `ramblings-systematic-debugging` | The job is fact-finding, not confirmed bugfix execution yet. |
 | You already have a bug or failing behavior to fix. | `ramblings-systematic-debugging` | `ramblings-investigation` | The task needs root-cause debugging and a safe fix. |
-| You want multiple review perspectives. | `ramblings-challenge-me` | A single review lens | This is a multi-lens critique problem. |
+| You want multiple review perspectives. | `ramblings-challenge-me` | A single review lens | This is a review-panel problem: preserve per-reviewer stance before synthesis. |
 | You want one question at a time after the assistant reads your doc. | `ramblings-grill-me` | `ramblings-challenge-me` | The interaction style matters more than the number of concerns. |
 | You need to know whether the work is ready for review, validation, or completion. | `ramblings-ready-check` | `ramblings-handoff` | This is a readiness/evidence question, not just context transfer. |
 | You only need to transfer current state to a future session. | `ramblings-handoff` | `ramblings-ready-check` | A handoff does not require a readiness claim unless one is asserted. |
@@ -201,7 +205,7 @@ For delegated Ultrawork execution, prefer a YAML checklist under `.ramblings/che
 | “Tests are failing after this change.” | `ramblings-systematic-debugging` | The problem is already a confirmed failing behavior that needs root-cause debugging. |
 | “How should we test this change?” | `ramblings-testing-strategy` | The testing/validation approach itself is the question. |
 | “Summarize what was verified and whether this is ready.” | `ramblings-ready-check` | The question is about evidence plus readiness state. |
-| “Challenge this plan from multiple angles.” | `ramblings-challenge-me` | The user wants structured multi-lens critique. |
+| “Challenge this plan from multiple angles.” | `ramblings-challenge-me` | The user wants a structured review panel, not just one reviewer or a flattened summary. |
 | “Find edge cases I’m missing.” | `ramblings-qa-review` | The dominant concern is failure modes and verification gaps. |
 | “Read this spec and ask me one question at a time.” | `ramblings-grill-me` | The interaction style is document-grounded one-question-at-a-time pressure testing. |
 | “I need to leave this for my next session.” | `ramblings-handoff` | The goal is future-session context transfer, not readiness judgment. |
