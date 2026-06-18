@@ -10,6 +10,7 @@
     "validate:start-work": "tsc -p tsconfig.start-work.json --noEmit"
   },
   "dependencies": {
+    "@opencode-ai/plugin": "^1.17.8",
     "yaml": "2.9.0"
   },
   "devDependencies": {

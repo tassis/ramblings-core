@@ -10,7 +10,21 @@ See `docs/skills.md` for the current taxonomy, routing rules, and overlap guide.
 
 ### `plugin/`
 
-Contains an OpenCode plugin that registers this repo's `skills/` path, injects optional commands into live config, and injects the custom `conductor` planning agent.
+Contains an OpenCode plugin that registers this repo's `skills/` path, injects optional commands into live config, injects the custom `conductor` planning agent, and exposes a small top-level custom-tool surface for `start-work`.
+
+## Workflow lifecycle
+
+The intended framework lifecycle is:
+
+1. discussion / shaping
+2. spec writing
+3. planning
+4. execution
+5. review
+6. handoff / ready-check
+7. archive / cleanup
+
+These are not separate products. They are different phases of the same workflow framework.
 
 ## Design decisions
 
@@ -20,15 +34,43 @@ Contains an OpenCode plugin that registers this repo's `skills/` path, injects o
 - The plugin does **not** perform git actions.
 - Commands are lightweight prompt shortcuts that encourage the right `ramblings-*` skill usage.
 - `conductor` is the repo-owned planning surface; native `@plan` behavior remains outside this repo's contract.
+- `Reviewer` / `reviewer` is the shared callable review agent; reviewer persona still comes primarily from the selected review skill.
+- `start-work` has a small tool-backed mechanical surface for deterministic state operations, but it is not a full runtime scheduler.
+- The plugin-exposed helper tools should use repo-prefixed names (`ramblings_start_work_*`) to avoid host-runtime collisions with unprefixed `start_work_*` names.
+
+## Surface taxonomy
+
+- **skill**: capability, context, method, persona, and boundary definition
+- **agent**: stable role surface with explicit permissions or reusable operational posture
+- **tool**: deterministic operation callable by an agent
+- **command**: convenience entrypoint into the right workflow surface
+
+This repo intentionally uses all four surfaces together rather than collapsing everything into one mechanism.
+
+## Stable vs evolving surfaces
+
+More stable at the conceptual level:
+
+- project-root `.ramblings/` artifacts
+- `start-work` as execution entrypoint
+- review / handoff / ready-check / archive as workflow phases
+- `Reviewer` as the shared callable review agent surface
+
+More likely to evolve internally:
+
+- exact helper layout
+- exact tool list
+- exact agent prompt wording
+- exact command wording
 
 ## Current command-surface boundary
 
 This repo's command hardening is currently contract-driven, not runtime-engine-driven.
 
 - `handoff`, `resume-from-handoff`, and `start-work` can define artifact rules, selection ladders, and stop conditions in their prompt surfaces.
-- `start-work` is now also gaining helper-backed control logic under `plugin/start-work/` for active artifact resolution, continuation outcomes, and YAML checklist-first execution state.
+- `start-work` is now gaining helper-backed control logic under `plugin/start-work/` plus top-level plugin custom tools for resolution and checklist state transitions.
 - These command surfaces still do **not** provide a full standalone runtime scheduler or executor.
-- Determinism currently comes from clearer artifact contracts plus explicit helper-backed control rules, not from a deeper runtime engine.
+- Determinism currently comes from clearer artifact contracts plus explicit helper-backed control rules and tool-wrapped state operations, not from a deeper runtime engine.
 
 ## Start-work execution boundary
 

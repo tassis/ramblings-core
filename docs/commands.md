@@ -14,23 +14,37 @@ Use for early discussion, scope discovery, and feature or product shaping.
 
 Use for a substantial feature or project workflow that should move from discussion through spec, plan, execution, and ready-check.
 
+## challenge-me
+
+Use for structured multi-perspective challenge of the current idea, spec, plan, or in-progress change.
+
+This command routes through the shared `Reviewer` agent (`@reviewer`) while instructing `ramblings-challenge-me`.
+
+For panel reviews, `ramblings-challenge-me` should spawn one independent reviewer invocation per selected lens and synthesize only after those lane-specific positions are explicit.
+
+## grill-me
+
+Use for one-question-at-a-time pressure testing of the current idea, spec, plan, or approach.
+
+This command stays skill-first and instructs `ramblings-grill-me` directly rather than routing through the shared `Reviewer` panel carrier.
+
 ## plan-ceo-review
 
 Use for product-oriented challenge of a spec or plan.
 
-This command now routes through the shared `review` agent while still instructing `ramblings-product-review`.
+This command now routes through the shared `Reviewer` agent (`@reviewer`) while still instructing `ramblings-product-review`.
 
 ## plan-eng-review
 
 Use for engineering-oriented challenge of a spec or plan.
 
-This command now routes through the shared `review` agent while still instructing `ramblings-engineering-review`.
+This command now routes through the shared `Reviewer` agent (`@reviewer`) while still instructing `ramblings-engineering-review`.
 
 ## qa-review
 
 Use for failure-mode and verification challenge.
 
-This command now routes through the shared `review` agent while still instructing `ramblings-qa-review`.
+This command now routes through the shared `Reviewer` agent (`@reviewer`) while still instructing `ramblings-qa-review`.
 
 ## careful
 
@@ -100,6 +114,20 @@ The intended contract is for `/start-work` to route into a dedicated execution o
 
 `start-work` should prefer a machine-readable YAML checklist under `.ramblings/checklists/` as the durable execution-state source of truth when one exists.
 
+The plugin also exposes small deterministic custom tools for `start-work` so agents can resolve artifacts and write checklist state without reimplementing helper logic.
+
+Use the repo-prefixed helper tool names when calling them directly:
+
+- `ramblings_start_work_resolve`
+- `ramblings_start_work_begin_task`
+- `ramblings_start_work_record_blocked`
+- `ramblings_start_work_record_completion`
+- `ramblings_start_work_rerun_continuation`
+
+Do not rely on unprefixed `start_work_*` names in the host runtime.
+
+Within this framework, `start-work` is the primary execution surface. Plans make work executable, checklists keep execution state durable, and the tool-backed path keeps the most mechanical transitions deterministic without claiming a full autonomous scheduler.
+
 Recommended YAML execution-state shape:
 
 ```yaml
@@ -131,6 +159,7 @@ Rules:
 - `status` remains the primary task state; do not replace it with `delegated`.
 - Top-level `delegations` may record participating specialist sessions for resume/reconcile support.
 - Delegation and waiting should be expressed as annotations such as `delegated_to` and `waiting_on`.
+- The tool-backed path is deterministic for state transitions, but it is still bounded by the command/skill contract rather than a full scheduler.
 - First iteration scope assumes one active task and at most one active delegated lane per task.
 - First iteration scope is sequential by default and does not assume routine same-type parallel delegation.
 - Recommended registry lifecycle: `running` → `terminal_unreconciled` → `terminal_reconciled`, with `cancelled_obsolete` reserved for stale-lane cleanup after verified terminal completion.

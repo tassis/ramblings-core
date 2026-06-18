@@ -6,6 +6,15 @@ This page is the quick routing guide for the repo's workflow skills.
 - Use the linked `SKILL.md` files for full guidance and output structure.
 - Command-first entrypoints such as `office-hours`, `handoff`, `resume-from-handoff`, and `start-work` are documented in `docs/commands.md`.
 
+Quick routing:
+
+- discuss or shape direction → `ramblings-brainstorming`
+- write the direction down → `ramblings-spec-writing`
+- turn it into execution tasks → `ramblings-writing-plans`
+- execute an existing plan → `ramblings-implementing-plans` / `start-work`
+- challenge from one or more review perspectives → review skills / `ramblings-challenge-me`
+- archive and clean finished work → `ramblings-archive`
+
 ## Archive Policy
 
 Completed execution artifacts should move out of the active `.ramblings/` paths and into archive-by-plan-unit directories.
@@ -144,7 +153,7 @@ If neither handoff supersedes the other and the current plan/checklist/spec stat
 | [`ramblings-qa-review`](../skills/ramblings-qa-review/SKILL.md) | QA reviewer contract focused on likely breakage, verification gaps, and proof quality. | The main question is what can break and what is still unverified. | Product-value critique or implementation execution. |
 | [`ramblings-devex-review`](../skills/ramblings-devex-review/SKILL.md) | DevEx reviewer contract focused on maintainer/operator pain, setup friction, and workflow clarity. | The main question is setup pain, maintainability, CLI clarity, or debugging friction. | End-user UX review or generic architecture review. |
 
-The repo also exposes a shared `review` agent surface for review workflows. It is a stable carrier only; the selected review skill remains the primary source of reviewer persona, skepticism, and verdict shape.
+The repo also exposes a shared `Reviewer` agent surface (`@reviewer`) for review workflows. It is a stable carrier only; the selected review skill remains the primary source of reviewer persona, skepticism, and verdict shape.
 
 ## Review Orchestration and Review Workflow
 
@@ -155,7 +164,7 @@ The repo also exposes a shared `review` agent surface for review workflows. It i
 | [`ramblings-requesting-code-review`](../skills/ramblings-requesting-code-review/SKILL.md) | Prepare a focused review request after implementation exists. | The next step is reviewer attention and you want the review context organized. | Handling existing reviewer comments. |
 | [`ramblings-receiving-code-review`](../skills/ramblings-receiving-code-review/SKILL.md) | Evaluate and respond to incoming review feedback. | Reviewer comments already exist and need technical handling. | Requesting a new review or brainstorming design options from scratch. |
 
-Multi-session review is allowed as an optional pattern: one shared review-agent surface may be instantiated multiple times with different review skills/personas when tension between reviewers is useful. This does **not** imply separate reviewer-specific agents by default. Keep exchanges bounded and leave final synthesis/arbitration to `ramblings-challenge-me` or a broader orchestration layer.
+The shared `Reviewer` surface (`@reviewer`) should be instantiated once per selected review lens when a panel is needed. For `ramblings-challenge-me`, reviewer lane count should match lens count, each lane should use its own session/context, and final synthesis/arbitration should stay in `ramblings-challenge-me` or a broader orchestration layer. This still does **not** imply separate reviewer-specific agent definitions by default.
 
 ## Command-First / Protocol / Modifier Guidance
 
@@ -206,6 +215,7 @@ For delegated Ultrawork execution, prefer a YAML checklist under `.ramblings/che
 | “How should we test this change?” | `ramblings-testing-strategy` | The testing/validation approach itself is the question. |
 | “Summarize what was verified and whether this is ready.” | `ramblings-ready-check` | The question is about evidence plus readiness state. |
 | “Challenge this plan from multiple angles.” | `ramblings-challenge-me` | The user wants a structured review panel, not just one reviewer or a flattened summary. |
+| “Grill this plan and ask hard questions one by one.” | `ramblings-grill-me` | The user wants sequential interrogation, not panel synthesis. |
 | “Find edge cases I’m missing.” | `ramblings-qa-review` | The dominant concern is failure modes and verification gaps. |
 | “Read this spec and ask me one question at a time.” | `ramblings-grill-me` | The interaction style is document-grounded one-question-at-a-time pressure testing. |
 | “I need to leave this for my next session.” | `ramblings-handoff` | The goal is future-session context transfer, not readiness judgment. |

@@ -59,5 +59,14 @@ Completion rules:
 - do not declare the overall plan complete until all tasks are complete, no tasks remain blocked or in progress, required verification is done, and current handoffs do not claim remaining execution work
 
 State-writeback contract:
-- execution-state updates must be written only to the project-root .ramblings/ artifacts that own the current plan state`
+- execution-state updates must be written only to the project-root .ramblings/ artifacts that own the current plan state
+
+Tool contract:
+- when using the plugin's deterministic helper tools, use the repo-prefixed names:
+  - \`ramblings_start_work_resolve\`
+  - \`ramblings_start_work_begin_task\`
+  - \`ramblings_start_work_record_blocked\`
+  - \`ramblings_start_work_record_completion\`
+  - \`ramblings_start_work_rerun_continuation\`
+- do not assume unprefixed \`start_work_*\` tool names are safe in the host runtime`
 }

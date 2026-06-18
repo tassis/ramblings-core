@@ -1,14 +1,16 @@
 import path from "path"
 import { fileURLToPath } from "url"
 import { conductor } from "./agents/conductor"
-import { review } from "./agents/review"
+import { reviewer } from "./agents/review"
 import { ramblingsCommands } from "./commands/index"
+import { startWorkTools } from "./tools/start-work"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const skillsDir = path.resolve(__dirname, "../skills")
 
 export default async function ramblingsPlugin() {
   return {
+    tool: startWorkTools,
     config: async (config: any) => {
       config.skills = config.skills || {}
       config.skills.paths = config.skills.paths || []
@@ -24,8 +26,8 @@ export default async function ramblingsPlugin() {
         config.agent.conductor = conductor
       }
 
-      if (!("review" in config.agent)) {
-        config.agent.review = review
+      if (!("reviewer" in config.agent)) {
+        config.agent.reviewer = reviewer
       }
 
       for (const [name, definition] of Object.entries(ramblingsCommands)) {
