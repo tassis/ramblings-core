@@ -6,6 +6,33 @@ This page is the quick routing guide for the repo's workflow skills.
 - Use the linked `SKILL.md` files for full guidance and output structure.
 - Command-first entrypoints such as `office-hours`, `handoff`, `resume-from-handoff`, and `start-work` are documented in `docs/commands.md`.
 
+## Archive Policy
+
+Completed execution artifacts should move out of the active `.ramblings/` paths and into archive-by-plan-unit directories.
+
+Preferred structure:
+
+```text
+.ramblings/archive/YYYY-MM-DD-<topic>/
+  plan.md
+  checklist.md
+  handoff.md        # optional
+  ready-check.md    # optional
+  retro.md          # optional
+  debug.md          # optional
+```
+
+Rules:
+
+- `plan.md` and `checklist.md` are the minimum archived pair.
+- Optional artifacts should be copied only when they clearly belong to the same work unit.
+- Active discovery should ignore `.ramblings/archive/**`.
+- Archived artifacts are historical records, not candidates for `start-work`.
+- Archive only after the work is no longer executable: checklist complete, no `in_progress`, no `blocked`, no remaining active execution work.
+- If a `ready-check` exists, archive is safest when its state is `ready`; if no `ready-check` exists, a conservative fallback may archive only when the checklist and handoff state still show no remaining active work.
+- After archival, active-area copies of the same plan/checklist should not remain in `.ramblings/plans/` or `.ramblings/checklists/`.
+- There is currently no dedicated archive command; archive is a manual operator workflow until experience proves a command is necessary.
+
 ## Phase Skills
 
 | Skill | Purpose | Use when | Not for |

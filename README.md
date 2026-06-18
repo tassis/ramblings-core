@@ -61,11 +61,16 @@ If you are testing from a local clone instead of GitHub, you can still use a dir
 - `write-spec`
 - `write-plan`
 - `start-work`
-- `execute-plan`
 
 ## Skill taxonomy
 
 For the routing guide, overlap rules, and linked skill index, see [`docs/skills.md`](docs/skills.md).
+
+Completed execution artifacts may be moved under project-root `.ramblings/archive/` so active execution discovery can ignore stale plans and checklists.
+
+Archive should happen only after the work is no longer an active execution candidate.
+
+There is currently no dedicated archive command; archiving is an explicit operator action.
 
 ## Agent provided by the plugin
 

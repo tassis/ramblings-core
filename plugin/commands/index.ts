@@ -1,6 +1,5 @@
 import { careful } from "./careful"
 import { conductorCommand } from "./conductor"
-import { executePlan } from "./execute-plan"
 import { handoff } from "./handoff"
 import { investigate } from "./investigate"
 import { officeHours } from "./office-hours"
@@ -17,7 +16,6 @@ import { writeSpec } from "./write-spec"
 export const ramblingsCommands = {
   "careful": careful,
   "conductor": conductorCommand,
-  "execute-plan": executePlan,
   "handoff": handoff,
   "investigate": investigate,
   "office-hours": officeHours,

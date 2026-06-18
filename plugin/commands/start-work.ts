@@ -10,6 +10,7 @@ Treat this as /start-work semantics:
 - start or resume; do not assume this always starts from scratch
 - locate the project-root .ramblings/ directory only
 - identify the active unfinished plan safely before editing
+- ignore .ramblings/archive/** during active plan/checklist discovery; archived artifacts are historical records, not runnable candidates
 - prefer a separate checklist/execution-state artifact over inline plan status
 - treat handoffs as hints, not stronger than an active checklist
 - if multiple unfinished plans are plausible, do not guess; ask the user to choose

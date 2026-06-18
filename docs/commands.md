@@ -58,6 +58,8 @@ Use to turn an approved direction into an implementation plan.
 
 Use to start or resume execution from the active unfinished plan under the current project's root `.ramblings/` directory.
 
-## execute-plan
+Active discovery should ignore `.ramblings/archive/**`; archived plans are historical records, not execution candidates.
 
-Legacy alias for `start-work`.
+Archive only after the work is truly complete enough that no active execution should resume from it.
+
+There is currently no dedicated archive command. Archive is an explicit operator action: once the work is no longer an active execution candidate, move the completed plan and its owning checklist into a plan-unit archive directory under `.ramblings/archive/`.
