@@ -25,7 +25,7 @@ Add this to `opencode.json`:
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "ramblings-skills@git+https://github.com/tassis/ramblings-skills.git"
+    "ramblings@git+https://github.com/tassis/ramblings.git"
   ]
 }
 ```
