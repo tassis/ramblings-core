@@ -23,13 +23,26 @@ Look for handoff artifacts in:
 
 ### 1. Find the newest relevant handoff
 
-Prefer the most recent handoff that matches the topic or workstream.
+Use this selection ladder:
+
+1. filter to handoffs relevant to the requested or inferred work unit/topic;
+2. prefer exact `work_unit` matches over broader `topic` matches;
+3. exclude handoffs marked `superseded`, `stale`, or clearly invalidated by newer source artifacts;
+4. prefer a handoff that explicitly `supersedes` another candidate;
+5. among the remaining candidates, prefer the newest dated handoff.
+
+Older handoffs without frontmatter metadata may still be considered during resume, but treat them conservatively:
+
+- infer `topic` or workstream from filename/content only when it is reasonably clear;
+- prefer explicitly referenced source artifacts over inferred handoff claims;
+- if old handoffs remain ambiguous after verification, stop and ask the user.
 
 ### 2. Verify that it is still current
 
 Check whether:
 
 - the referenced plan or spec still exists;
+- the active checklist or plan does not contradict the handoff's claimed state;
 - newer work has already changed the situation;
 - blockers are still real;
 - the suggested next step still makes sense.
@@ -44,6 +57,8 @@ Read the referenced artifacts first, such as:
 - `.ramblings/plans/...`
 - `.ramblings/reviews/...`
 - `.ramblings/debug/...`
+
+Source artifacts outrank the handoff note even after a candidate handoff is selected.
 
 ### 4. Reconstruct current state
 
@@ -89,5 +104,7 @@ Depending on the state, hand off to:
 ## Guidance
 
 - newest handoff first, but verify before trusting;
+- if multiple candidates remain equally plausible after verification, stop and ask the user rather than guessing;
 - source artifacts outrank the handoff note;
+- mixed old/new handoff sets are allowed; new metadata improves selection, but does not retroactively make older notes authoritative;
 - if no handoff is current enough, say so and rebuild context deliberately.

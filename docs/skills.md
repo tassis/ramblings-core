@@ -33,6 +33,91 @@ Rules:
 - After archival, active-area copies of the same plan/checklist should not remain in `.ramblings/plans/` or `.ramblings/checklists/`.
 - There is currently no dedicated archive command; archive is a manual operator workflow until experience proves a command is necessary.
 
+## Handoff Artifact Policy
+
+Handoffs are append-only dated snapshots under `.ramblings/handoffs/`; they are not a single overwritten `current.md` file.
+
+New handoffs should use compact frontmatter metadata:
+
+```yaml
+---
+topic: ultrawork
+work_unit: ultrawork-runtime-hardening
+references:
+  - .ramblings/plans/...
+  - .ramblings/specs/...
+supersedes: 2026-06-18-ultrawork-status-handoff.md   # optional
+status: active                                       # active | superseded | stale | complete
+---
+```
+
+Rules:
+
+- `work_unit` is the preferred resume key when present.
+- `references` should point to the source-of-truth artifacts the next session must read.
+- `supersedes` may explicitly mark a newer handoff as replacing an older one without deleting history.
+- `status` is a handoff-level hint, not a replacement for checklist or ready-check state.
+- The handoff body should stay compact and reference-first.
+
+Resume selection ladder:
+
+1. Filter to handoffs relevant to the requested or inferred work unit/topic.
+2. Prefer exact `work_unit` matches over broader `topic` matches.
+3. Exclude handoffs marked `superseded`, `stale`, or clearly invalidated by newer source artifacts.
+4. Prefer a handoff that explicitly `supersedes` another candidate.
+5. Among remaining candidates, prefer the newest dated handoff.
+6. Verify against referenced plans/specs/checklists before trusting the handoff.
+7. If multiple candidates remain equally plausible after verification, ask the user rather than guessing.
+
+Migration guidance:
+
+- Older handoffs without frontmatter remain usable as historical inputs.
+- New handoffs should use the normalized metadata contract.
+- Prefer forward-only migration; do not rewrite historical handoffs by default.
+- For older handoffs, infer topic/workstream from filename or content only when reasonably clear, then verify against referenced source artifacts.
+- If mixed old/new handoffs still leave ambiguity, ask the user rather than guessing.
+
+Examples:
+
+### Example 1: same topic, different work units
+
+```text
+.ramblings/handoffs/2026-06-18-ultrawork-status-handoff.md
+  topic: ultrawork
+  work_unit: ultrawork-runtime-hardening
+
+.ramblings/handoffs/2026-06-19-ultrawork-status-handoff.md
+  topic: ultrawork
+  work_unit: ultrawork-archive-cleanup
+```
+
+If the requested continuation is runtime hardening, resume should prefer the exact `work_unit` match even if the archive-cleanup handoff is newer.
+
+### Example 2: explicit supersession
+
+```text
+.ramblings/handoffs/2026-06-18-ultrawork-status-handoff.md
+
+.ramblings/handoffs/2026-06-20-ultrawork-runtime-handoff.md
+  topic: ultrawork
+  work_unit: ultrawork-runtime-hardening
+  supersedes: 2026-06-18-ultrawork-status-handoff.md
+```
+
+After verifying references, resume should prefer the newer handoff that explicitly supersedes the older one.
+
+### Example 3: ambiguity must stop
+
+```text
+.ramblings/handoffs/2026-06-20-ultrawork-runtime-a.md
+  work_unit: ultrawork-runtime-hardening
+
+.ramblings/handoffs/2026-06-20-ultrawork-runtime-b.md
+  work_unit: ultrawork-runtime-hardening
+```
+
+If neither handoff supersedes the other and the current plan/checklist/spec state does not clearly disambiguate them, ask the user rather than guessing.
+
 ## Phase Skills
 
 | Skill | Purpose | Use when | Not for |
@@ -80,6 +165,8 @@ Rules:
 | `careful` | Explicit command-first high-risk mode hint. | You already know the task is risky before evaluation starts. | Generic planning that has not shown risk signals. |
 | `handoff` / `resume-from-handoff` | Explicit protocol entrypoints for session transfer. | You clearly want to preserve or restore session context. | General workflow routing when no transfer is involved. |
 | `start-work` | Command-first entrypoint for plan execution. | An active unfinished plan exists and should be resumed or continued. | Requirement discovery or plan writing. |
+
+For delegated Ultrawork execution, prefer a YAML checklist under `.ramblings/checklists/` as the durable execution-state source of truth. Keep task `status` simple (`not_started`, `in_progress`, `blocked`, `complete`) and express delegation/waiting through annotations like `delegated_to` and `waiting_on`.
 
 ## Overlap and Routing Rules
 

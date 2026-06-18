@@ -5,5 +5,15 @@
   "description": "Ramblings workflow skills and OpenCode command-injection plugin",
   "type": "module",
   "main": "./plugin/ramblings-plugin.ts",
-  "exports": "./plugin/ramblings-plugin.ts"
+  "exports": "./plugin/ramblings-plugin.ts",
+  "scripts": {
+    "validate:start-work": "tsc -p tsconfig.start-work.json --noEmit"
+  },
+  "dependencies": {
+    "yaml": "2.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0",
+    "typescript": "5.9.2"
+  }
 }

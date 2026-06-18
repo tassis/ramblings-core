@@ -17,6 +17,28 @@ Save handoff files under:
 .ramblings/handoffs/YYYY-MM-DD-<topic>.md
 ```
 
+New handoffs should use a compact frontmatter block:
+
+```yaml
+---
+topic: ultrawork
+work_unit: ultrawork-runtime-hardening
+references:
+  - .ramblings/plans/...
+  - .ramblings/specs/...
+supersedes: 2026-06-18-ultrawork-status-handoff.md   # optional
+status: active                                       # active | superseded | stale | complete
+---
+```
+
+Field guidance:
+
+- `topic`: broad human grouping for the work.
+- `work_unit`: narrower resume key; prefer this over `topic` when both are present.
+- `references`: source-of-truth artifacts the next session should read first.
+- `supersedes`: optional explicit replacement link to an older handoff.
+- `status`: handoff lifecycle hint without deleting historical context.
+
 ## When to use
 
 Use this skill when:
@@ -36,9 +58,10 @@ That means:
 
 1. create them only when a real handoff is needed;
 2. date them clearly;
-3. when resuming, read the newest relevant handoff first;
-4. treat older handoffs as historical context, not primary truth;
-5. after a successful continuation, obsolete handoffs may be cleaned up or ignored.
+3. keep them append-only rather than rewriting one mutable `current.md` handoff;
+4. when resuming, read the newest relevant handoff first;
+5. treat older handoffs as historical context, not primary truth;
+6. after a successful continuation, obsolete handoffs may be cleaned up or ignored.
 
 ## Core rule
 
@@ -65,6 +88,16 @@ Include only what the next session actually needs:
 ## Suggested output
 
 ```markdown
+---
+topic: [broad topic]
+work_unit: [narrower work unit]
+references:
+  - .ramblings/specs/...
+  - .ramblings/plans/...
+supersedes: [older handoff filename, optional]
+status: active
+---
+
 # [Topic] Handoff
 
 ## Current objective
@@ -88,6 +121,9 @@ Include only what the next session actually needs:
 ## Guidance
 
 - if the handoff claims the work is ready for review, validation, or completion, reference the latest `ramblings-ready-check` result or include equivalent evidence;
+- new handoffs should use the normalized metadata contract even if older handoffs did not;
+- older handoffs without frontmatter remain valid historical context; do not rewrite them by default just to match the new format;
+- prefer forward-only migration unless an existing handoff is actively causing ambiguity for real resume work;
 - optimize for continuation, not storytelling;
 - keep it compact;
 - call out what changed the plan or direction;

@@ -1,4 +1,9 @@
-import { schedulerReminder } from "../reminders"
+import { hookReturnReminder, schedulerReminder } from "../reminders"
+import {
+  continuationOutcomeContract,
+  executionOrchestratorContract,
+  firstIterationSequentialPolicy,
+} from "../start-work/continuation"
 
 export const startWork = {
   description: "Start or resume execution from the active unfinished plan",
@@ -6,15 +11,21 @@ export const startWork = {
 
 ${schedulerReminder}
 
+${hookReturnReminder}
+
+${executionOrchestratorContract}
+
 Treat this as /start-work semantics:
 - start or resume; do not assume this always starts from scratch
 - locate the project-root .ramblings/ directory only
-- identify the active unfinished plan safely before editing
+- identify the active unfinished YAML checklist/plan safely before editing
 - ignore .ramblings/archive/** during active plan/checklist discovery; archived artifacts are historical records, not runnable candidates
-- prefer a separate checklist/execution-state artifact over inline plan status
+- prefer a separate YAML checklist/execution-state artifact over inline plan status
 - treat handoffs as hints, not stronger than an active checklist
 - if multiple unfinished plans are plausible, do not guess; ask the user to choose
 - if no unfinished plan can be identified safely, stop and tell the user to create or choose a plan explicitly
+
+${firstIterationSequentialPolicy}
 
 Source-of-truth contract:
 - when checklist, plan status, and handoff disagree, prefer checklist first, then plan status, then handoff
@@ -30,6 +41,8 @@ Execution contract:
 - final verification is orchestrator-owned after reconciliation
 - writing code is not enough to finish a task; verify, re-check completion criteria, then update the project-root .ramblings/ plan/checklist state
 - if execution cannot safely continue, enter blocked or replanning explicitly instead of guessing
+
+${continuationOutcomeContract}
 
 Waiting contract:
 - if required background work is still running and no other independent runnable task is available, enter a valid waiting state rather than blocked or complete

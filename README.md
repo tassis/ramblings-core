@@ -62,6 +62,8 @@ If you are testing from a local clone instead of GitHub, you can still use a dir
 - `write-plan`
 - `start-work`
 
+`start-work` is intended as the execution entrypoint and should operate against project-root `.ramblings/` artifacts with a YAML checklist as the preferred durable execution-state source of truth.
+
 ## Skill taxonomy
 
 For the routing guide, overlap rules, and linked skill index, see [`docs/skills.md`](docs/skills.md).
