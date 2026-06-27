@@ -42,6 +42,7 @@ Execution is checklist-driven: runtime work assumes an existing `.ramblings/chec
   - `handoff`
   - `resume-from-handoff`
   - `archive`
+  - `create-integration` (authoring helper for extension-pack drafting)
 - Agent: `@conductor`
 - Skills path: `/skills` in this repository
 
@@ -50,6 +51,7 @@ Execution is checklist-driven: runtime work assumes an existing `.ramblings/chec
 - Brainstorming, briefing, planning, execution, continuation, and archive mechanics.
 - Project-root `.ramblings/` artifacts as durable state.
 - Minimal helper tools required for `start-work` state operations.
+- Authoring assistance for extension pack authors through `ramblings-integration-creator`.
 - No execution entrypoint without checklist state: the checklist is the executable current-state source, while plans remain semantic instructions and risk guidance. Empty optional checklist fields should not be serialized as `null` placeholders.
 
 ## What is not in scope
@@ -57,6 +59,7 @@ Execution is checklist-driven: runtime work assumes an existing `.ramblings/chec
 - `ready-check`, review, challenge, grill, careful, investigate, triage, retro, prototype, testing-strategy, and similar specialized workflow packs.
 - Mandatory ideology (no mandatory TDD, no mandatory careful mode, no mandatory review posture).
 - Compatibility or fallback aliases for removed command/agent/skill surfaces.
+- Turn-key extension runtime/registry behavior (extension packs remain optional and are never required for core workflow use).
 
 These specialized workflows can be added later as separate packages that compose with `ramblings-core`.
 

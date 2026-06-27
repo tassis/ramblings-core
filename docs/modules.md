@@ -13,6 +13,7 @@ This is the canonical keep/remove/out-of-scope map for this repository.
 - `plugin/commands/handoff.ts`
 - `plugin/commands/resume-from-handoff.ts`
 - `plugin/commands/archive.ts`
+- `plugin/commands/create-integration.ts`
 
 ### Agent
 
@@ -27,6 +28,7 @@ This is the canonical keep/remove/out-of-scope map for this repository.
 - `skills/ramblings-handoff/SKILL.md`
 - `skills/ramblings-resume-from-handoff/SKILL.md`
 - `skills/ramblings-archive/SKILL.md`
+- `skills/ramblings-integration-creator/SKILL.md`
 
 ### Runtime / helpers
 

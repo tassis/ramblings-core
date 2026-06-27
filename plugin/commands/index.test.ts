@@ -6,6 +6,7 @@ test("ramblingsCommands exports only the final core command set", () => {
   const actual = Object.keys(ramblingsCommands).sort()
   const expected = [
     "archive",
+    "create-integration",
     "handoff",
     "office-hours",
     "resume-from-handoff",

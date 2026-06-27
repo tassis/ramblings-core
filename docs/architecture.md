@@ -35,6 +35,7 @@ Contains only the core skills registered by this package:
 - `ramblings-handoff`
 - `ramblings-resume-from-handoff`
 - `ramblings-archive`
+- `ramblings-integration-creator`
 
 ### `plugin/`
 
@@ -43,6 +44,7 @@ Contains the OpenCode plugin registration and core command/tool wiring:
 - injects only core commands
 - registers the `conductor` planning agent
 - exposes only the repo-prefixed `start-work` helper tools
+- includes `create-integration` as an optional authoring helper for extension-pack scaffolding
 
 ## Default lifecycle
 
@@ -71,6 +73,7 @@ This lifecycle is implemented around durable project-root `.ramblings/` artifact
 - Commands are convenience entrypoints, not a full runtime scheduler.
 - `conductor` remains a planning surface and is not used as a substitute execution orchestrator; it may draft/normalize an initial checklist before execution starts.
 - The plugin avoids global bootstrap behavior and does not override existing user-defined commands/agents of the same name.
+- `conductor` may use plugin-provided agents when available, but extension packs are optional and core-owned execution paths remain safe fallback.
 - Non-core workflow methods and specialist packs are kept out of this package’s default surface.
 
 When installed, extension packs should prefer specialized-first routing only when the match is clear; otherwise the generic core phase remains the fallback.

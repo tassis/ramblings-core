@@ -13,6 +13,7 @@ For command-first entrypoints, see [`docs/commands.md`](commands.md).
 - [`ramblings-handoff`](../skills/ramblings-handoff/SKILL.md)
 - [`ramblings-resume-from-handoff`](../skills/ramblings-resume-from-handoff/SKILL.md)
 - [`ramblings-archive`](../skills/ramblings-archive/SKILL.md)
+- [`ramblings-integration-creator`](../skills/ramblings-integration-creator/SKILL.md)
 
 ### Routing guide (core only)
 
@@ -23,6 +24,7 @@ For command-first entrypoints, see [`docs/commands.md`](commands.md).
 - transfer context → `ramblings-handoff`
 - resume context → `ramblings-resume-from-handoff`
 - cleanup completed work → `ramblings-archive`
+- author extension pack drafts → `ramblings-integration-creator`
 
 ## Verification policy in skills
 
@@ -45,5 +47,11 @@ Future follow-on packs should connect to `ramblings-core` using one of these sha
 - **phase overlay**: keep the core phase but add stronger domain-specific posture or structure;
 - **delegated posture**: improve delegated-lane behavior during execution without changing lifecycle ownership;
 - **route-out workflow**: become an optional next-skill / external workflow when the work clearly leaves core scope.
+
+`ramblings-integration-creator` is explicitly an authoring helper:
+
+- It can draft extension skills and, when needed, a single extension agent and plugin-side conductor integration guidance.
+- plugin-provided agents are optional; if unavailable, routing remains core fallback.
+- It does not add new runtime lifecycle phases or ownership.
 
 These are follow-on integration types, not changes to core artifact semantics.

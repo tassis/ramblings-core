@@ -9,6 +9,7 @@
 - `handoff`
 - `resume-from-handoff`
 - `archive`
+- `create-integration` (extension-pack authoring helper)
 
 The canonical lifecycle remains: brainstorm → brief → plan → execute → handoff/resume → archive.
 
@@ -49,8 +50,22 @@ Perform explicit cleanup and archive consolidation once work is no longer an act
 
 `/start-work` keeps a narrow auto-cleanup path for safe completed/cancelled units at entry; broader ambiguity/conflict cleanup remains operator-driven in `archive`.
 
+## `create-integration`
+
+Draft extension-pack integration artifacts for authors (skills/agents/guidance):
+
+- asks for missing assumptions before drafting,
+- creates a compact `SKILL.md` draft,
+- optionally creates one agent draft,
+- optionally creates plugin-side guidance for optional `conductor` specialist expansion,
+- preserves explicit core fallback when extension match is weak or missing.
+
+This command is for authoring only and does not change core lifecycle, artifact ownership, or runtime execution.
+
 ## Verification and specialization
 
 Verification discipline (evidence requirements, completion criteria) is a core concern here.
 
 Specialized workflow methods (review lenses, testing strategy modes, triage, investigation/debug, readiness/reporting packs, and other method-focused workflows) are intentionally outside `ramblings-core` and are not part of this command set.
+
+`create-integration` is optional and does not imply extension packs are required for normal `ramblings-core` use.

@@ -33,6 +33,17 @@ In Conductor Mode these files are planning artifacts under `.ramblings/` and mus
 - This phase is the main place to record task tags explicitly for downstream execution hints.
 - Keep tags few, meaningful, and optional.
 - Missing or sparse tags are valid; execution should not depend on them being present.
+- Treat task-level `Tags` as the main work-shape routing hints; skill-local wording may help discovery, but the plan is the source of truth for task-level tags.
+
+### Preferred starter tag set
+
+Prefer this shared starter set before inventing new tags.
+
+- **domain:** `coding`, `writing`, `frontend`, `backend`, `database`, `docs`, `workflow`
+- **process:** `planning`, `implementation`, `refactor`, `migration`, `debug`, `qa`, `handoff`, `archive`
+- **risk / posture:** `high-risk`, `verification-heavy`, `bounded`, `multi-step`
+
+If one of these fits, use it instead of inventing a synonym. Add a new tag only when the starter set clearly cannot express the work shape.
 
 ## When to use
 
@@ -94,7 +105,7 @@ The checklist is the source of **live execution state**; the plan is planning in
 
 **Why:** [why this task exists]
 
-**Tags:** [optional, few, e.g. `backend`, `frontend`, `docs`]
+**Tags:** [optional, few, prefer the shared starter set first, e.g. `coding`, `backend`, `migration`]
 **Risk:** [low/medium/high; key uncertainty]
 
 **Files:**

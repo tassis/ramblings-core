@@ -16,6 +16,16 @@ test("plugin registration exposes only core command/agent/tool surface", async (
   }
 
   await plugin.config(config)
+  const expectedCommands = [
+    "archive",
+    "create-integration",
+    "handoff",
+    "office-hours",
+    "resume-from-handoff",
+    "start-work",
+    "write-brief",
+    "write-plan",
+  ].sort()
 
   assert.equal(plugin.tool, startWorkTools)
   assert.deepEqual(Object.keys(plugin.tool).sort(), [
@@ -31,7 +41,8 @@ test("plugin registration exposes only core command/agent/tool surface", async (
   assert.deepEqual(Object.keys(config.agent).sort(), ["conductor"].sort())
   assert.ok("conductor" in config.agent)
 
-  assert.deepEqual(Object.keys(config.command).sort(), Object.keys(ramblingsCommands).sort())
+  assert.deepEqual(Object.keys(config.command).sort(), expectedCommands)
+  assert.ok("create-integration" in config.command)
   for (const [name, definition] of Object.entries(ramblingsCommands)) {
     assert.equal(config.command[name], definition)
   }

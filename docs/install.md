@@ -29,12 +29,14 @@ If you are developing from a local checkout, use a direct plugin path instead:
 This package is `ramblings-core` and exposes only the core surface:
 
 - register `/skills` from this repo
-- register core commands: `office-hours`, `write-brief`, `write-plan`, `start-work`, `handoff`, `resume-from-handoff`, `archive`
+- register core commands: `office-hours`, `write-brief`, `write-plan`, `start-work`, `handoff`, `resume-from-handoff`, `archive`, `create-integration`
 - register the `conductor` planning agent
+- expose `ramblings-integration-creator` for extension-pack authoring guidance
 
 ## Notes
 
 - If you already define a command with the same name in your own config, this plugin leaves your command untouched.
 - Restart OpenCode after config changes.
+- `create-integration` is optional documentation-authoring help; it does not require extension packs to be installed for core workflows.
 
 Note: since this is a focused core package, this refactor does not provide compatibility aliases or compatibility shims for removed command surfaces.
